@@ -22,8 +22,8 @@ class _PerguntaAppState extends State<PerguntaApp> {
       'texto': 'Qual sua bebida favorita?',
       'respostas': [
         { 'texto': 'Chimarrão', 'pontuacao': 40},
-        { 'texto': 'Cerveja', 'pontuacao': 9},
-        { 'texto': 'Cachaça', 'pontuacao': 7},
+        { 'texto': 'Cerveja', 'pontuacao': 7},
+        { 'texto': 'Cachaça', 'pontuacao': 4},
         { 'texto': 'Café', 'pontuacao': 60},
       ],
     },
@@ -32,8 +32,8 @@ class _PerguntaAppState extends State<PerguntaApp> {
       'respostas': [
         { 'texto': 'Internacional', 'pontuacao': 8},
         { 'texto': 'Grêmio', 'pontuacao': 8},
-        { 'texto': 'Afogados', 'pontuacao': 6},
-        { 'texto': 'Nenhum destes', 'pontuacao': 3},
+        { 'texto': 'Afogados', 'pontuacao': 4},
+        { 'texto': 'Nenhum destes', 'pontuacao': 2},
       ],
     },
   ];
@@ -47,6 +47,13 @@ class _PerguntaAppState extends State<PerguntaApp> {
       print(_perguntaSelecionada);
       print(_pontuacaoTotal);
     }
+  }
+
+  void _reiniciarQuestionario() {
+    setState(() {
+      _perguntaSelecionada = 0;
+      _pontuacaoTotal = 0;
+    });
   }
 
   bool get temPerguntaSelecionada {
@@ -67,7 +74,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
               perguntaSelecionada: _perguntaSelecionada,
               responder: _responder
           )
-              : Resultado(_pontuacaoTotal),
+              : Resultado(_pontuacaoTotal, _reiniciarQuestionario),
         )
     );
   }
