@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_perguntas/questao.dart';
-import 'package:projeto_perguntas/resposta.dart';
+import 'package:projeto_perguntas/resultado.dart';
+import 'package:projeto_perguntas/questionario.dart';
 
 main() => runApp(PerguntaApp());
 
@@ -38,26 +38,18 @@ class _PerguntaAppState extends State<PerguntaApp> {
   @override
   Widget build(BuildContext context) {
 
-    List<String> respostas = temPerguntaSelecionada
-        ? _perguntas[_perguntaSelecionada]['respostas']
-        : null;
-
     return MaterialApp(
         home: Scaffold(
           appBar: AppBar(
             title: Text('Perguntas'),
           ),
-          body: temPerguntaSelecionada ? Column(
-            children: <Widget>[
-              Questao(_perguntas[_perguntaSelecionada]['texto']),
-              ...respostas.map((r) => Resposta(r, _responder)).toList(),
-            ],
-          ) : Center(
-            child: Text(
-              'Parabéns!',
-              style: TextStyle(fontSize: 28),
-            ),
-          ),
+          body: temPerguntaSelecionada
+              ? Questionario(
+                  perguntas: _perguntas,
+                  perguntaSelecionada: _perguntaSelecionada,
+                  responder: _responder
+              )
+              : Resultado(),
         )
     );
   }
